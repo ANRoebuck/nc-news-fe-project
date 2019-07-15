@@ -8,8 +8,7 @@ class ArticleCard extends Component {
         const { article } = this.props;
         return (
             <Link
-                to={`articles/${article.article_id}`}
-                state={{ article }}  
+                to={`/articles/${article.article_id}`}
             >
             {article.title}
             </Link>
