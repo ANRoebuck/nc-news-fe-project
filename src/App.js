@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Router, Link } from '@reach/router';
 import './App.css';
+import Nav from './components/Nav'
+import Articles from './components/Articles'
+import ArticlePage from './components/ArticlePage'
+import { getTopics } from './utils/utils';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+class App extends Component {
+
+  state = {
+    topics: []
+  };
+
+  render () {
+    const { topics } = this.state;
+
+    return (
+      <div className="App">
+        <h1 className="Title">NC-News</h1>
+        <Nav topics={topics}></Nav>
+        <Router className="Router">
+          <Articles path="/articles" />
+          <Articles path="/topics/:topic" />
+          <ArticlePage path="/articles/:article_id" />
+        </Router>
+        <footer className="Footer">
+          <h3>This is a footer, it goes at the bottom</h3>
+        </footer>
+      </div>
+    );
+  };
+
+  componentDidMount () {
+    this.fetchTopics();
+  };
+
+  componentDidUpdate (prevProps, prevState) {
+  };
+  
+  fetchTopics = async () => {
+    const topics = await getTopics();
+    this.setState({ topics });
+  };
+
+};
+
 
 export default App;
