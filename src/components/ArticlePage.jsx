@@ -18,7 +18,7 @@ class ArticlePage extends Component {
             <div>
                 <h2>{title}</h2>
                 <div>{created_at}</div>
-                <div>{body}</div>
+                <p>{body}</p>
                 <div className="ArticleScore">
                     <div> Comments: {comment_count}</div>
                     <div> Votes: {votes}</div>
@@ -53,7 +53,6 @@ class ArticlePage extends Component {
 
     fetchArticleComments = async () => {
         const comments = await getArticleComments(this.props.article_id);
-        console.log(comments);
         this.setState({ comments });
     };
 };

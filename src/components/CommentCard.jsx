@@ -6,12 +6,14 @@ class CommentCard extends Component {
         const { body, author, votes, created_at } = this.props.comment
         return (
             <div className="CommentCard">
-                <div className="CommentBody">
-                    {body}
+                <div className="CommentInfo">
+                    <div className="CommentUser">User: {author}</div>
+                    <div className="CommentDate">{created_at}</div>
                 </div>
-                <div className="CommentFooter">
-                    <div>User: {author}</div>
-                    <div>{created_at}</div>
+                <p className="CommentBody">
+                    {body}
+                </p>
+                <div className="CommentVotes">
                     <div>Votes: {votes}</div>
                 </div>
             </div>

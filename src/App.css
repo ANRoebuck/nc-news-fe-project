@@ -1,6 +1,5 @@
 .App {
-    /* height: 100vh;
-    width: 100vw; */
+    display: grid;  
     grid-template-rows: 2fr, 1fr, 8fr, 1fr;
     grid-template-areas:
       "header"
@@ -27,7 +26,7 @@
 }
 
 .Router {
-    grid-area: router;
+    grid-area: main;
     overflow-y: scroll;
 }
 
@@ -42,20 +41,32 @@
     text-transform: capitalize;
 }
 
+
 .ArticleScore {
     display: flex;
     justify-content: space-evenly;
+    margin: 20px;
 }
 
 .CommentCard {
     margin: 20px;
+    display: grid;
+    grid-template-columns: 1fr, 5fr, 1fr ;
+    grid-template-areas:
+      "info body votes";
+}
+
+.CommentInfo {
+    grid-area: info;
 }
 
 .CommentBody {
-
+    grid-area: body;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
 }
 
-.CommentFooter {
-    display: flex;
-    justify-content: space-evenly;
+.CommentVotes {
+    grid-area: votes;
 }

@@ -16,15 +16,16 @@ class Articles extends Component {
         return (
             <div>
                 <h2 className="ArticlesHeader">{topic ? `Articles on ${topic}` : `All Articles`}</h2>
+                <ul className="ArticlesList">
                 {articles.map(article => {
                     const { article_id } = article;
                     return (
-                        <ArticleCard
-                            key={article_id}
-                            article={article}
-                        />
+                        <li key={article_id}>
+                            <ArticleCard article={article}/>
+                        </li>
                     );
                 })}
+                </ul>
             </div>
         );
     };
