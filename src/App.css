@@ -20,7 +20,6 @@
     display: flex;
     justify-content: space-evenly;
 }
-
 .NavLink {
     text-transform: capitalize;
 }
@@ -41,7 +40,6 @@
     text-transform: capitalize;
 }
 
-
 .ArticleScore {
     display: flex;
     justify-content: space-evenly;
@@ -49,24 +47,78 @@
 }
 
 .CommentCard {
+    border: solid 1px orange;
     margin: 20px;
     display: grid;
-    grid-template-columns: 1fr, 5fr, 1fr ;
+    grid-template-columns: 1fr, 6fr, 1fr ;
     grid-template-areas:
       "info body votes";
 }
 
 .CommentInfo {
+    border: solid 1px chartreuse;
     grid-area: info;
 }
 
 .CommentBody {
+    border: solid 1px red;
     grid-area: body;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 100%;
 }
 
 .CommentVotes {
+    border: solid 1px blue;
     grid-area: votes;
+    display:grid;
+    grid-template-rows: 1fr, 2fr;
+    grid-template-areas:
+        "voteScore"
+        "voteButtons";
+}
+.VoteScore {
+    text-align: center;
+    padding: 0px;
+    grid-area: voteScore;
+}
+.VoteButtons {
+    grid-area: voteButtons;
+    display: grid;
+    grid-template-rows: 1fr, 1fr;
+    grid-template-areas:
+        "voteButtonsTop"
+        "voteButtonsBottom";
+}
+.VoteUp {
+    grid-area: voteButtonsTop;
+}
+.VoteDown {
+    grid-area: voteButtonsBottom;
+}
+.ComentDelete {
+    grid-area: voteButtonsBottom;
+}
+.VoteButton {
+    margin: 5px;
+    padding: 8px;
+    background-color: silver;
+}
+
+
+
+.NewCommentForm {
+    border: solid 1px yellow;
+    display: grid;
+    grid-template-columns: 7fr, 1fr;
+    grid-template-rows: 1fr, 1fr;
+    grid-template-areas:
+        "input cancel"
+        "input submit";
+}
+.NewCommentInput {
+    grid-area: input;
+}
+.NewCommentCancelButton {
+    grid-area: cancel;
+}
+.NewCommentSubmitButton {
+    grid-area: submit;
 }

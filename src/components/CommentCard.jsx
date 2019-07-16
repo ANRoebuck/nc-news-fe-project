@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class CommentCard extends Component {
+
+    state = {
+        currentUser: ''
+    };
+
     render() {
-        const { body, author, votes, created_at } = this.props.comment
+        const { comment, handleSubmit } = this.props;
+        const { body, author, votes, created_at, comment_id } = comment;
         return (
             <div className="CommentCard">
                 <div className="CommentInfo">
@@ -14,12 +20,35 @@ class CommentCard extends Component {
                     {body}
                 </p>
                 <div className="CommentVotes">
-                    <div>Votes: {votes}</div>
+                    <div className="VoteScore">Votes: {votes}</div>
+                    {author === this.state.currentUser ?
+                        <div className="VoteButtons">
+                            <button
+                                className="CommentDelete"
+                                id="CommentDelete"
+                                value={comment_id}
+                                type="button"
+                                onClick={handleSubmit}
+                            >
+                                Delete Comment
+                            </button>
+                        </div>
+                        :
+                        <div className="VoteButtons">
+                        <button className="VoteUp voteButton">Vote Up</button>
+                        <button className="VoteDown voteButton">Vote Down</button>
+                        </div>
+                    }
                 </div>
             </div>
         );
-    }
-}
+    };
+
+    componentDidMount () {
+        this.setState({ currentUser: this.props.currentUser });
+    };
+
+};
 
 CommentCard.propTypes = {
 

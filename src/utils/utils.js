@@ -21,3 +21,13 @@ export const getArticleComments = async (article_id) => {
     const { data : { comments }} = await axios.get(apiUrl + `articles/${article_id}/comments`);
     return comments;
 };
+
+export const postComment = async (newComment, article_id) => {
+    const { data : { comment }} = await axios.post(apiUrl + `articles/${article_id}/comments`, { ...newComment });
+    return comment;
+};
+
+export const deleteComment = async (comment_id) => {
+    const { data } = await axios.delete(apiUrl + `comments/${comment_id}`);
+    return data;
+};
