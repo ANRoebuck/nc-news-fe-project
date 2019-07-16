@@ -29,23 +29,44 @@
     overflow-y: scroll;
 }
 
+.ArticlesHeader {
+    text-align: center;
+    text-transform: capitalize;
+}
+
 .Footer {
     grid-area: footer;
     text-align: center;
 }
 
 
-.ArticlesHeader {
-    text-align: center;
-    text-transform: capitalize;
-}
 
-.ArticleScore {
+.ArticleTitle{
+    text-align: center;
+}
+.ArticleAuthor {
+    margin-left: 20px;
+}
+.ArticleCreated {
+    margin-left: 20px;
+}
+.ArticleBody {
+    border: solid 1px black;
+    margin: 20px;
+    padding: 20px;
+}
+.ArticleFooter {
     display: flex;
     justify-content: space-evenly;
+    border: solid 1px black;
     margin: 20px;
+    padding: 20px;
 }
 
+
+.CommentsHeader {
+    margin-left: 20px;
+}
 .CommentCard {
     border: solid 1px orange;
     margin: 20px;
@@ -54,17 +75,14 @@
     grid-template-areas:
       "info body votes";
 }
-
 .CommentInfo {
     border: solid 1px chartreuse;
     grid-area: info;
 }
-
 .CommentBody {
     border: solid 1px red;
     grid-area: body;
 }
-
 .CommentVotes {
     border: solid 1px blue;
     grid-area: votes;
@@ -76,7 +94,6 @@
 }
 .VoteScore {
     text-align: center;
-    padding: 0px;
     grid-area: voteScore;
 }
 .VoteButtons {
@@ -106,6 +123,7 @@
 
 .NewCommentForm {
     border: solid 1px yellow;
+    margin: 20px;
     display: grid;
     grid-template-columns: 7fr, 1fr;
     grid-template-rows: 1fr, 1fr;

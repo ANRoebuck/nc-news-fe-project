@@ -22,17 +22,17 @@ class ArticlePage extends Component {
     
     render() {
         const { article, comments } = this.state;
-        const { title, body, comment_count, votes, created_at, author } = article;
+        const { title, body, comment_count, votes, created_at, author, article_id } = article;
         
         return (
 
             <div>
-                <h2>{title}</h2>
+                <h2 className="ArticleTitle">{title}</h2>
                 <h3 className="ArticleAuthor">{author}</h3>
                 <h3 className="ArticleCreated">{created_at}</h3>
-                <p>{body}</p>
+                <p className="ArticleBody">{body}</p>
 
-                <div className="ArticleScore">
+                <div className="ArticleFooter">
 
                     <form
                         className="AddComment"
@@ -49,7 +49,26 @@ class ArticlePage extends Component {
 
                     <div> Comments: {comment_count}</div>
                     <div> Votes: {votes}</div>
-                    <div>SomeVoteButtonsHere</div>
+                    <div className="ArticleVoteButtons">
+                        <button
+                                className="VoteUp voteButton"
+                                id="ArticleUpVote"
+                                value={article_id}
+                                type="button"
+                                onClick={this.handleSubmit}
+                            >
+                                Vote Up
+                            </button>
+                            <button
+                                className="VoteDown voteButton"
+                                id="ArticleDownVote"
+                                value={article_id}
+                                type="button"
+                                onClick={this.handleSubmit}
+                            >
+                                Vote Down
+                            </button>
+                    </div>
 
                 </div>
 
@@ -87,7 +106,7 @@ class ArticlePage extends Component {
 
                 <div>
                     {comments.length > 0 ?
-                        <div>Here are some comments</div>
+                        <h3 className="CommentsHeader">Here are some comments</h3>
                         : null
                     }
                     {comments.map(comment => {
