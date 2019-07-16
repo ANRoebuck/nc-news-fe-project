@@ -200,7 +200,6 @@ class ArticlePage extends Component {
     voteComment = async (comment_id, vote) => {
         patchComment(comment_id, vote)
             .then(response => {
-                console.log(response);
                 this.fetchArticleComments();
                 return response;
             })

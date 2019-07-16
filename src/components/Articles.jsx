@@ -16,16 +16,25 @@ class Articles extends Component {
         return (
             <div>
                 <h2 className="ArticlesHeader">{topic ? `Articles on ${topic}` : `All Articles`}</h2>
-                <ul className="ArticlesList">
-                {articles.map(article => {
-                    const { article_id } = article;
-                    return (
-                        <li key={article_id}>
-                            <ArticleCard article={article}/>
-                        </li>
-                    );
-                })}
-                </ul>
+                <table className="ArticlesTable">
+                    <thead className="TableHeader">
+                        <tr>
+                            <th className="TableTitle">Title</th>
+                            <th className="TableAuthor">Author</th>
+                            <th className="TableCreatedAt">Date Published</th>
+                            <th className="TableComments">Comments</th>
+                            <th className="TableVotes">Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {articles.map(article => {
+                            const { article_id } = article;
+                            return (
+                                <ArticleCard key={article_id} article={article}/>
+                            );
+                        })}
+                    </tbody>
+                </table>
             </div>
         );
     };
