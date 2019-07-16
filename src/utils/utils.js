@@ -4,7 +4,11 @@ const apiUrl = 'https://fantastic-news-api.herokuapp.com/api/';
 
 export const getTopics = async () => {
     const { data : { topics }} = await axios.get(apiUrl + 'topics');
-    return topics;
+    return topics.sort(function (a, b) {
+        if (a.slug < b.slug) return -1;
+        if (a.slug > b.slug) return 1;
+        return 0;
+    });
 };
 
 export const getArticles = async (args) => {
@@ -40,4 +44,12 @@ export const deleteComment = async (comment_id) => {
 export const patchComment = async (comment_id, vote) => {
     const { data } = await axios.patch(apiUrl + `comments/${comment_id}`, { inc_votes: vote});
     return data;
-}
+};
+
+export const formatDate = date => {
+    const day = date.slice(8,10);
+    const month = date.slice(5,7);
+    const year = date.slice(0,4);
+    const time = date.slice(11,16);
+    return `${day}/${month}/${year} ${time}`;
+};
