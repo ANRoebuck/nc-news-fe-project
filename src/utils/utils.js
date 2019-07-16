@@ -7,8 +7,13 @@ export const getTopics = async () => {
     return topics;
 };
 
-export const getArticles = async (topic) => {
-    const { data : { articles }} = await axios.get(apiUrl + 'articles', { params : { topic }});
+export const getArticles = async (args) => {
+    const { data : { articles }} = await axios.get(apiUrl + 'articles', { 
+        params : { 
+            topic: args.topic,
+            author: args.author 
+        }
+    });
     return articles;
 };
 

@@ -13,7 +13,11 @@ class ArticleCard extends Component {
                         {title}
                     </Link>
                 </td>
-                <td className="TableAuthor">{author}</td>
+                <td className="TableAuthor">
+                    <Link to={`/users/${author}/articles`}>
+                        {author}
+                    </Link>
+                </td>
                 <td className="TableCreatedAt">{created_at}</td>
                 <td className="TableComments">{comment_count}</td>
                 <td className="TableVotes">{votes}</td>

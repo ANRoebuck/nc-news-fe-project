@@ -10,12 +10,18 @@ class Articles extends Component {
     };
 
     render() {
-        const { topic } = this.props;
+        const { topic, author } = this.props;
         const { articles } = this.state;
 
         return (
             <div>
-                <h2 className="ArticlesHeader">{topic ? `Articles on ${topic}` : `All Articles`}</h2>
+                <h2
+                    className="ArticlesHeader"
+                >
+                    {topic ? `Articles on ${topic}`
+                    : {author} ? `Articles by ${author}`
+                    : `All Articles`}
+                </h2>
                 <table className="ArticlesTable">
                     <thead className="TableHeader">
                         <tr>
@@ -45,11 +51,13 @@ class Articles extends Component {
 
     componentDidUpdate (prevProps, prevState) {
         const newTopic = this.props.topic !== prevProps.topic;
-        if (newTopic) this.fetchArticles();
+        const newAuthor = this.props.author !== prevProps.author;
+        if (newTopic || newAuthor) this.fetchArticles();
     };
 
     fetchArticles = async () => {
-        const articles = await getArticles(this.props.topic);
+        const args = { topic: this.props.topic, author: this.props.author };
+        const articles = await getArticles(args);
         this.setState({ articles });
     };
 };
