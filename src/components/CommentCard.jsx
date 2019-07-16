@@ -35,8 +35,24 @@ class CommentCard extends Component {
                         </div>
                         :
                         <div className="VoteButtons">
-                        <button className="VoteUp voteButton">Vote Up</button>
-                        <button className="VoteDown voteButton">Vote Down</button>
+                            <button
+                                className="VoteUp voteButton"
+                                id="CommentUpVote"
+                                value={comment_id}
+                                type="button"
+                                onClick={handleSubmit}
+                            >
+                                Vote Up
+                            </button>
+                            <button
+                                className="VoteDown voteButton"
+                                id="CommentDownVote"
+                                value={comment_id}
+                                type="button"
+                                onClick={handleSubmit}
+                            >
+                                Vote Down
+                            </button>
                         </div>
                     }
                 </div>

@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getArticleById, getArticleComments, postComment, deleteComment } from './../utils/utils';
+import {
+    getArticleById,
+    getArticleComments,
+    postComment,
+    deleteComment,
+    patchComment
+} from './../utils/utils';
 import CommentCard from './CommentCard';
 
 
@@ -113,6 +119,8 @@ class ArticlePage extends Component {
         if (id === 'CancelAddComment') this.setState({ addComment: false, newComment: '' })
         if (id === 'NewCommentForm') this.sendComment();
         if (id === 'CommentDelete') this.removeComment(value);
+        if (id === 'CommentUpVote') this.voteComment(value, 1);
+        if (id === 'CommentDownVote') this.voteComment(value, -1);
     };
 
     handleChange = event => {
@@ -168,6 +176,18 @@ class ArticlePage extends Component {
            .catch(err => {
                console.log(err);
            });
+    };
+
+    voteComment = async (comment_id, vote) => {
+        patchComment(comment_id, vote)
+            .then(response => {
+                console.log(response);
+                this.fetchArticleComments();
+                return response;
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
 };
