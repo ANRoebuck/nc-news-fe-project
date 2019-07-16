@@ -19,7 +19,7 @@ class Articles extends Component {
                     className="ArticlesHeader"
                 >
                     {topic ? `Articles on ${topic}`
-                    : {author} ? `Articles by ${author}`
+                    : author ? `Articles by ${author}`
                     : `All Articles`}
                 </h2>
                 <table className="ArticlesTable">
@@ -56,7 +56,8 @@ class Articles extends Component {
     };
 
     fetchArticles = async () => {
-        const args = { topic: this.props.topic, author: this.props.author };
+        const { topic, author } = this.props;
+        const args = { topic, author };
         const articles = await getArticles(args);
         this.setState({ articles });
     };
