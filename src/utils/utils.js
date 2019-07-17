@@ -16,7 +16,9 @@ export const getArticles = async (args) => {
     const { data : { articles }} = await axios.get(apiUrl + 'articles', { 
         params : { 
             topic: args.topic,
-            author: args.author 
+            author: args.author ,
+            sort_by: args.sort_by,
+            order: args.order
         }
     });
     return articles;
@@ -42,8 +44,8 @@ export const deleteComment = async (comment_id) => {
     return data;
 };
 
-export const patchComment = async (comment_id, vote) => {
-    const { data } = await axios.patch(apiUrl + `comments/${comment_id}`, { inc_votes: vote});
+export const patchVotes = async (segment, id, inc_votes) => {
+    const { data } = await axios.patch(apiUrl + `${segment}/${id}`, { inc_votes });
     return data;
 };
 

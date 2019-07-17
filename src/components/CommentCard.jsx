@@ -1,48 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { formatDate } from './../utils/utils';
+import { formatDate, patchVotes } from './../utils/utils';
+import VoteButton from './VoteButton';
 
 class CommentCard extends Component {
 
     state = {
-        currentUser: ''
+        voteChange: 0
     };
 
     render() {
-        const { comment, handleSubmit } = this.props;
+        const { comment, currentUser, removeComment } = this.props;
         const { body, author, votes, created_at, comment_id } = comment;
-        const formattedDate = created_at ? formatDate(created_at) : '...just now';
+        const formattedDate = formatDate(created_at);
+        const { voteChange } = this.state;
+
         return (
             <div className="CommentCard">
                 <div className="CommentInfo">
                     <div className="CommentUser">User: {author}</div>
                     <div className="CommentDate">{formattedDate}</div>
                 </div>
-                <p className="CommentBody">
-                    {body}
-                </p>
+                <p className="CommentBody">{body}</p>
+
                 <div className="CommentVotes">
-                    <div className="VoteScore">Votes: {votes}</div>
-                    {author !== this.state.currentUser ?
+                    <div className="VoteScore">Votes: {votes + voteChange}</div>
+                    {author !== currentUser ?
                         <div className="VoteButtons">
-                            <button
-                                className="VoteUp voteButton"
-                                id="CommentUpVote"
-                                value={comment_id}
-                                type="button"
-                                onClick={handleSubmit}
-                            >
-                                Vote Up
-                            </button>
-                            <button
-                                className="VoteDown voteButton"
-                                id="CommentDownVote"
-                                value={comment_id}
-                                type="button"
-                                onClick={handleSubmit}
-                            >
-                                Vote Down
-                            </button>
+                            <VoteButton
+                                label="Vote Up"
+                                id={comment_id}
+                                segment="comments"
+                                inc_votes={1}
+                                sendVote={this.sendVote}
+                                voted={voteChange === 1}
+                            />
+                            <VoteButton
+                                label="Vote Down"
+                                id={comment_id}
+                                segment="comments"
+                                inc_votes={-1}
+                                sendVote={this.sendVote}
+                                voted={voteChange === -1}
+                            />
                         </div>
                         :
                         <div className="VoteButtons">
@@ -51,7 +51,7 @@ class CommentCard extends Component {
                                 id="CommentDelete"
                                 value={comment_id}
                                 type="button"
-                                onClick={handleSubmit}
+                                onClick={removeComment}
                             >
                                 Delete Comment
                             </button>
@@ -62,8 +62,17 @@ class CommentCard extends Component {
         );
     };
 
-    componentDidMount () {
-        this.setState({ currentUser: this.props.currentUser });
+    sendVote = async (segment, id, inc_votes) => {
+        this.setState(state => {
+            return {
+                voteChange: state.voteChange + inc_votes
+            };
+        });
+
+        patchVotes(segment, id, inc_votes)
+            .catch(err => {
+                console.log(err)
+            });
     };
 
 };

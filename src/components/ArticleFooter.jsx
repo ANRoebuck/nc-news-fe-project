@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { conditionalExpression } from '@babel/types';
+import { patchVotes } from './../utils/utils';
+import VoteButton from './VoteButton';
 
 class ArticleFooter extends Component {
+
+    state = {
+        voteChange: 0
+    };
 
     render() {
 
         const { article_id, addComment, comment_count, votes } = this.props;
+        const { voteChange } = this.state;
 
         return (
 
@@ -21,36 +27,43 @@ class ArticleFooter extends Component {
                 </button>
 
                 <div> Comments: {comment_count}</div>
-                <div> Votes: {votes}</div>
+                <div> Votes: {votes + voteChange}</div>
 
                 <div className="ArticleVoteButtons">
-                    <button
-                        className="VoteUp voteButton"
-                        id="ArticleUpVote"
-                        value={article_id}
-                        type="button"
-                        onClick={this.placeholder}
-                    >
-                        Vote Up
-                    </button>
-                    <button
-                        className="VoteDown voteButton"
-                        id="ArticleDownVote"
-                        value={article_id}
-                        type="button"
-                        onClick={this.placeholder}
-                    >
-                        Vote Down
-                    </button>
+                    <VoteButton
+                        label="Vote Up"
+                        inc_votes={1}
+                        id={article_id}
+                        segment="articles"
+                        sendVote={this.sendVote}
+                        voted={voteChange === 1}
+                    />
+                    <VoteButton
+                        label="Vote Down"
+                        id={article_id}
+                        segment="articles"
+                        inc_votes={-1}
+                        sendVote={this.sendVote}
+                        voted={voteChange === -1}
+                    />
                 </div>
 
             </div>
         );
-    }
+    };
 
-    placeholder = () => {
-        console.log('article vote button pressed')
-    }
+    sendVote = async (segment, id, inc_votes) => {
+        this.setState(state => {
+            return {
+                voteChange: state.voteChange + inc_votes
+            };
+        });
+        
+        patchVotes(segment, id, inc_votes)
+            .catch(err => {
+                console.log(err)
+            });
+    };
 }
 
 ArticleFooter.propTypes = {

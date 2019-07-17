@@ -5,7 +5,7 @@ import {
     getArticleComments,
     postComment,
     deleteComment,
-    patchComment
+    formatDate
 } from './../utils/utils';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
@@ -28,27 +28,27 @@ class ArticlePage extends Component {
     render() {
         const { article, comments } = this.state;
         const { title, body, comment_count, votes, created_at, author, article_id } = article;
-        
+        const formattedDate = created_at ? formatDate(created_at) : null;
         return (
 
             <div>
                 <h2 className="ArticleTitle">{title}</h2>
                 <h3 className="ArticleAuthor">{author}</h3>
-                <h3 className="ArticleCreated">{created_at}</h3>
+                <h3 className="ArticleCreated">{formattedDate}</h3>
                 <p className="ArticleBody">{body}</p>
                 <ArticleFooter
                     className="ArticleFooter"
                     article_id={article_id}
-                    addComment={this.addComment}
                     comment_count={comment_count}
                     votes={votes}
+                    addComment={this.addComment}
                 />
 
                 {this.state.addComment === true &&
                     <CommentForm
+                        currentUser={this.state.currentUser}
                         cancelAddComment={this.cancelAddComment}
                         sendComment={this.sendComment}
-                        currentUser={this.state.currentUser}
                     />
                 }
 
@@ -60,7 +60,7 @@ class ArticlePage extends Component {
                                 key={comment.comment_id}
                                 comment={comment}
                                 currentUser={this.state.currentUser}
-                                handleSubmit={this.handleSubmit}
+                                removeComment={this.removeComment}
                             />
                         ))}
                     </div>
@@ -74,19 +74,6 @@ class ArticlePage extends Component {
     componentDidMount () {
         this.fetchArticle();
         this.fetchArticleComments();
-    };
-
-    handleSubmit = event => {
-        event.preventDefault();
-        const { id, value } = event.target;
-        if (id === 'CommentDelete') this.removeComment(value);
-        if (id === 'CommentUpVote') this.voteComment(value, 1);
-        if (id === 'CommentDownVote') this.voteComment(value, -1);
-    };
-
-    handleChange = event => {
-        const { id, value } = event.target;
-        if (id === 'NewCommentInput') this.setState({ newComment: value })
     };
 
     fetchArticle = async () => {
@@ -111,13 +98,13 @@ class ArticlePage extends Component {
             .then(postedComment => {
                 this.setState(state => {
                     return {
+                        ...state,
                         comments: [ postedComment, ...this.state.comments ],
                         article: {
-                            ...this.state.article,
-                            comment_count: (this.state.article.comment_count) +1
+                            ...state.article,
+                            comment_count: (state.article.comment_count) +1
                         },
-                        addComment: false,
-                        currentUser: this.state.currentUser
+                        addComment: false
                     };
                 });
             })
@@ -126,29 +113,16 @@ class ArticlePage extends Component {
             });
     };
 
-    removeComment = async (value) => {
+    removeComment = async event => {
+        const value = parseInt(event.target.value);
+        const updatedComments = this.state.comments.filter(comment => comment.comment_id !== value );
+
+        this.setState({ comments: updatedComments })
+
         deleteComment(value)
-           .then(response => {
-               this.fetchArticleComments();
-               return response;
-           })
-           .then(response => {
-               this.fetchArticle();
-               return response;
-           })
            .catch(err => {
                console.log(err);
            });
-    };
-    voteComment = async (comment_id, vote) => {
-        patchComment(comment_id, vote)
-            .then(response => {
-                this.fetchArticleComments();
-                return response;
-            })
-            .catch(err => {
-                console.log(err);
-            });
     };
 
 };
