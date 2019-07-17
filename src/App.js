@@ -18,7 +18,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1 className="Title">NC-News</h1>
+        <h1 className="Title">{`< NC-News />`}</h1>
         <Nav topics={topics}></Nav>
         <Router className="Router">
           <Articles path="/" />

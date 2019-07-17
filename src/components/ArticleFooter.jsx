@@ -26,8 +26,8 @@ class ArticleFooter extends Component {
                     Add Comment 
                 </button>
 
-                <div> Comments: {comment_count}</div>
-                <div> Votes: {votes + voteChange}</div>
+                <div className="ArticleFooterInfo"> Comments: {comment_count}</div>
+                <div className="ArticleFooterInfo"> Votes: {votes + voteChange}</div>
 
                 <div className="ArticleVoteButtons">
                     <VoteButton

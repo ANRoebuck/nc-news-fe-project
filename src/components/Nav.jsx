@@ -9,7 +9,7 @@ class Nav extends Component {
 
         return (
             <nav className="Nav">
-                <Link to={'/'} className="NavLink">All Articles</Link>
+                <Link to={'/'} className="NavLink">{`< All Articles />`}</Link>
                 {topics.map(topic => {
                     const { slug } = topic;
                     return (
@@ -17,7 +17,7 @@ class Nav extends Component {
                         key={slug}
                         to={`topics/${slug}`}
                         className="NavLink" >
-                    {slug}
+                    {`< ${slug} />`}
                     </Link>
                     )
                 })}

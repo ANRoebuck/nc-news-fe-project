@@ -63,6 +63,14 @@
     margin: 20px;
     padding: 20px;
 }
+.ArticleFooterInfo {
+    vertical-align: middle;
+}
+.AddCommentButton {
+    margin: 5px;
+    padding: 8px;
+    background-color: silver;
+}
 
 
 .CommentSection {
@@ -115,8 +123,11 @@
 .VoteDown {
     grid-area: voteButtonsBottom;
 }
-.ComentDelete {
+.CommentDelete {
     grid-area: voteButtonsBottom;
+    margin: 5px;
+    padding: 8px;
+    background-color: silver;
 }
 .VoteButton {
     margin: 5px;
@@ -160,6 +171,12 @@
     margin: 20px;
     background-color: silver;
     border: solid 1px orange;
+}
+th {
+    height: 50px;
+}
+.TableHeading {
+    height: 50px;
 }
 .TableTitle {
     width: 50%;
