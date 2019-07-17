@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jsxNamespacedName } from "@babel/types";
 
 const apiUrl = 'https://fantastic-news-api.herokuapp.com/api/';
 
@@ -48,8 +49,22 @@ export const patchComment = async (comment_id, vote) => {
 
 export const formatDate = date => {
     const day = date.slice(8,10);
-    const month = date.slice(5,7);
+    const months = {
+        '01': 'Jan',
+        '02': 'Feb',
+        '03': 'Mar',
+        '04': 'Apr',
+        '05': 'May',
+        '06': 'Jun',
+        '07': 'Jul',
+        '08': 'Aug',
+        '09': 'Sep',
+        '10': 'Oct',
+        '11': 'Nov',
+        '12': 'Dec'
+    }
+    const month = months[date.slice(5,7)];
     const year = date.slice(0,4);
     const time = date.slice(11,16);
-    return `${day}/${month}/${year} ${time}`;
+    return `${day} ${month} ${year} - ${time}`;
 };

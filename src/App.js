@@ -21,7 +21,7 @@ class App extends Component {
         <h1 className="Title">NC-News</h1>
         <Nav topics={topics}></Nav>
         <Router className="Router">
-          <Articles path="/articles" />
+          <Articles path="/" />
           <Articles path="/topics/:topic" />
           <Articles path="/users/:author/articles" />
           <ArticlePage path="/articles/:article_id" />

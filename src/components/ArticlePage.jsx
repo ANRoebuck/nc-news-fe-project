@@ -8,15 +8,20 @@ import {
     patchComment
 } from './../utils/utils';
 import CommentCard from './CommentCard';
+import CommentForm from './CommentForm';
+import ArticleFooter from './ArticleFooter';
 
 
 class ArticlePage extends Component {
 
     state = {
-        article: {},
+        article: {
+            article_id: 0,
+            votes: 0,
+            comment_count: 0
+        },
         comments: [],
         addComment: false,
-        newComment: '',
         currentUser: 'happyamy2016'
     };
     
@@ -31,95 +36,35 @@ class ArticlePage extends Component {
                 <h3 className="ArticleAuthor">{author}</h3>
                 <h3 className="ArticleCreated">{created_at}</h3>
                 <p className="ArticleBody">{body}</p>
+                <ArticleFooter
+                    className="ArticleFooter"
+                    article_id={article_id}
+                    addComment={this.addComment}
+                    comment_count={comment_count}
+                    votes={votes}
+                />
 
-                <div className="ArticleFooter">
-
-                    <form
-                        className="AddComment"
-                        id="AddComment"
-                        onSubmit={this.handleSubmit}
-                    >
-                        <button
-                            type="submit"
-                            className="AddCommentButton"
-                        >
-                            Add Comment
-                        </button>
-                    </form>
-
-                    <div> Comments: {comment_count}</div>
-                    <div> Votes: {votes}</div>
-                    <div className="ArticleVoteButtons">
-                        <button
-                                className="VoteUp voteButton"
-                                id="ArticleUpVote"
-                                value={article_id}
-                                type="button"
-                                onClick={this.handleSubmit}
-                            >
-                                Vote Up
-                            </button>
-                            <button
-                                className="VoteDown voteButton"
-                                id="ArticleDownVote"
-                                value={article_id}
-                                type="button"
-                                onClick={this.handleSubmit}
-                            >
-                                Vote Down
-                            </button>
-                    </div>
-
-                </div>
-
-                {this.state.addComment === true && 
-                    <form
-                        className="NewCommentForm"
-                        id="NewCommentForm"
-                        onSubmit={this.handleSubmit}
-                    >
-                        <input
-                            className="NewCommentInput"
-                            type="text"
-                            value={this.state.newComment}
-                            id="NewCommentInput"
-                            onChange={this.handleChange}>
-                        </input>
-
-                        <button
-                            className="NewCommentCancelButton"
-                            type="button"
-                            id="CancelAddComment"
-                            onClick={this.handleSubmit}
-                        >
-                                Cancel
-                        </button>
-
-                        <button
-                            className="NewCommentSubmitButton"
-                            type="submit"
-                        >
-                            Submit
-                        </button>
-                    </form>
+                {this.state.addComment === true &&
+                    <CommentForm
+                        cancelAddComment={this.cancelAddComment}
+                        sendComment={this.sendComment}
+                        currentUser={this.state.currentUser}
+                    />
                 }
 
-                <div>
-                    {comments.length > 0 ?
+                {comments.length > 0 &&
+                    <div className="CommentSection">
                         <h3 className="CommentsHeader">Here are some comments</h3>
-                        : null
-                    }
-                    {comments.map(comment => {
-                        return (
+                        {comments.map(comment => (
                             <CommentCard
                                 key={comment.comment_id}
                                 comment={comment}
                                 currentUser={this.state.currentUser}
                                 handleSubmit={this.handleSubmit}
                             />
-                        )
-                    })}
-                </div>
+                        ))}
+                    </div>
+                }
 
             </div>
 
@@ -134,9 +79,6 @@ class ArticlePage extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const { id, value } = event.target;
-        if (id === 'AddComment') this.setState({ addComment: true })
-        if (id === 'CancelAddComment') this.setState({ addComment: false, newComment: '' })
-        if (id === 'NewCommentForm') this.sendComment();
         if (id === 'CommentDelete') this.removeComment(value);
         if (id === 'CommentUpVote') this.voteComment(value, 1);
         if (id === 'CommentDownVote') this.voteComment(value, -1);
@@ -157,25 +99,27 @@ class ArticlePage extends Component {
         this.setState({ comments });
     };
 
-    sendComment = async () => {
-        const newComment = {
-            body: this.state.newComment,
-            username: this.state.currentUser,
-        }
-        const article_id = this.props.article_id;
-        
-        postComment(newComment, article_id)
-            .then(response => {
-                this.setState({ newComment: '', addComment: false });
-                return response;
-            })
-            .then(response => {
-                this.fetchArticleComments();
-                return response;
-            })
-            .then(response => {
-                this.fetchArticle();
-                return response;
+    addComment = () => {
+        this.setState({ addComment: true });
+    };
+    cancelAddComment = () => {
+        this.setState({ addComment: false });
+    };
+
+    sendComment = async (newComment) => {
+        postComment(newComment, this.props.article_id)
+            .then(postedComment => {
+                this.setState(state => {
+                    return {
+                        comments: [ postedComment, ...this.state.comments ],
+                        article: {
+                            ...this.state.article,
+                            comment_count: (this.state.article.comment_count) +1
+                        },
+                        addComment: false,
+                        currentUser: this.state.currentUser
+                    };
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -196,7 +140,6 @@ class ArticlePage extends Component {
                console.log(err);
            });
     };
-
     voteComment = async (comment_id, vote) => {
         patchComment(comment_id, vote)
             .then(response => {

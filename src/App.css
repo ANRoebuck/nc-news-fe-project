@@ -64,6 +64,10 @@
 }
 
 
+.CommentSection {
+    border: solid 1px black;
+    margin: 20px;
+}
 .CommentsHeader {
     margin-left: 20px;
 }
@@ -125,10 +129,11 @@
     border: solid 1px yellow;
     margin: 20px;
     display: grid;
-    grid-template-columns: 7fr, 1fr;
-    grid-template-rows: 1fr, 1fr;
+    grid-template-columns: 1fr, 100px;
+    grid-template-rows: 1fr, 1fr, 1fr;
     grid-template-areas:
         "input cancel"
+        "input deadspace"
         "input submit";
 }
 .NewCommentInput {
