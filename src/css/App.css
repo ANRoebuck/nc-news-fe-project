@@ -1,5 +1,4 @@
 .App {
-    height: 100%;
     width: 100%;
     display: grid;  
     grid-template-rows: 2fr, 1fr, 8fr, 1fr;
@@ -20,11 +19,14 @@
 .Nav {
     grid-area: nav;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
+    background-color: gainsboro;
 }
 .NavLink {
     text-transform: capitalize;
     color: black;
+    padding: 5px;
 }
 
 .Router {
