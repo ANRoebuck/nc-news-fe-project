@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Router, Link } from '@reach/router';
 import './css/App.css';
-import Nav from './components/Nav'
-import Articles from './components/Articles'
-import ArticlePage from './components/ArticlePage'
+import Nav from './components/Nav';
+import Articles from './components/Articles';
+import ArticlePage from './components/ArticlePage';
+import Error from './components/Error';
 import { getTopics } from './utils/utils';
 
 
@@ -25,9 +26,10 @@ class App extends Component {
           <Articles path="/topics/:topic" />
           <Articles path="/users/:author/articles" />
           <ArticlePage path="/articles/:article_id" />
+          <Error path="/error" />
         </Router>
         <footer className="Footer">
-          <h3>This is a footer, it goes at the bottom</h3>
+          <h3>{`< This is a footer, it goes at the bottom />`}</h3>
         </footer>
       </div>
     );

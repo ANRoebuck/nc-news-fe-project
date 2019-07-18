@@ -1,6 +1,5 @@
 .App {
     width: 100%;
-    padding: 20px;
     display: grid;  
     grid-template-rows: 2fr, 1fr, 8fr, 1fr;
     grid-template-areas:
@@ -28,6 +27,7 @@
 }
 
 .Router {
+    padding: 20px;
     grid-area: main;
     justify-content: space-evenly;
 }
