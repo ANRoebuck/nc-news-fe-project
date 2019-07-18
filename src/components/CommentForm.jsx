@@ -13,8 +13,8 @@ class CommentForm extends Component {
         const { cancelAddComment } = this.props;
 
         return (
-            <div>
-                <label for="NewCommentForm">
+            <div className="CommentFormContainer">
+                <label className ="NewCommentLabel" for="NewCommentForm">
                     Write a comment...
                 </label>
                 <form

@@ -11,7 +11,6 @@ import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 import ArticleFooter from './ArticleFooter';
 import '../css/ArticlePage.css'
-import '../css/CommentForm.css'
 import { navigate } from '@reach/router'
 
 class ArticlePage extends Component {
