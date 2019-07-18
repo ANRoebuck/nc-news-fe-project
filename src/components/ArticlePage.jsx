@@ -12,7 +12,7 @@ import CommentForm from './CommentForm';
 import ArticleFooter from './ArticleFooter';
 import '../css/ArticlePage.css'
 import '../css/CommentForm.css'
-
+import { navigate } from '@reach/router'
 
 class ArticlePage extends Component {
 
@@ -76,18 +76,29 @@ class ArticlePage extends Component {
 
     componentDidMount () {
         this.fetchArticle();
-        this.fetchArticleComments();
+        // this.fetchArticleComments();
     };
 
     fetchArticle = async () => {
-        const article = await getArticleById(this.props.article_id);
-        this.setState({ article });
+        try {
+            const article = await getArticleById(this.props.article_id);
+            const comments = await getArticleComments(this.props.article_id);
+            this.setState({ article, comments });
+        }
+        catch (err) {
+            navigate('/error', {
+                replace: true,
+                state: {
+                    message: err.message
+                }
+            })
+        }
     };
 
-    fetchArticleComments = async () => {
-        const comments = await getArticleComments(this.props.article_id);
-        this.setState({ comments });
-    };
+    // fetchArticleComments = async () => {
+    //     const comments = await getArticleComments(this.props.article_id);
+    //     this.setState({ comments });
+    // };
 
     addComment = () => {
         this.setState({ addComment: true });

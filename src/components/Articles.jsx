@@ -20,7 +20,7 @@ class Articles extends Component {
         const headers = [
             { className: 'TableTitle', id: 'title', heading: 'Title' },
             { className: 'TableAuthor', id: 'author', heading: 'Author' },
-            { className: 'TableCreatedAt', id: 'created_at', heading: 'Date Published' },
+            { className: 'TableCreatedAt', id: 'created_at', heading: 'Published' },
             { className: 'TableComments', id: 'comment_count', heading: 'Comments' },
             { className: 'TableVotes', id: 'votes', heading: 'Votes' }
         ]
@@ -46,7 +46,7 @@ class Articles extends Component {
                                         key={`header${id}`}
                                         onClick={this.changeSort}
                                     >
-                                    {`< ${heading} />`}
+                                    {heading}
                                      {sort_by === id
                                         ? order === 'asc'
                                             ? ` ${up}`

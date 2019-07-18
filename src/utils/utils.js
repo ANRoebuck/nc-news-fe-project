@@ -68,5 +68,5 @@ export const formatDate = date => {
     const month = months[date.slice(5,7)];
     const year = date.slice(0,4);
     const time = date.slice(11,16);
-    return `${day} ${month} ${year} - ${time}`;
+    return `${day} ${month} ${year}`;
 };

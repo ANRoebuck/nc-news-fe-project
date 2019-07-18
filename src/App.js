@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className="Title">{`< NC-News />`}</h1>
-        <Nav topics={topics}></Nav>
+        <Nav className="Nav" topics={topics}></Nav>
         <Router className="Router">
           <Articles path="/" />
           <Articles path="/topics/:topic" />
