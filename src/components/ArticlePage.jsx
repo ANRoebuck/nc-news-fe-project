@@ -76,29 +76,31 @@ class ArticlePage extends Component {
 
     componentDidMount () {
         this.fetchArticle();
-        // this.fetchArticleComments();
+        this.fetchArticleComments();
     };
 
     fetchArticle = async () => {
         try {
             const article = await getArticleById(this.props.article_id);
-            const comments = await getArticleComments(this.props.article_id);
-            this.setState({ article, comments });
+            // const comments = await getArticleComments(this.props.article_id);
+            this.setState({ article });
         }
         catch (err) {
+            console.log(err.response);
             navigate('/error', {
                 replace: true,
                 state: {
-                    message: err.message
+                    status: err.response.status,
+                    message: err.response.data.message
                 }
             })
         }
     };
 
-    // fetchArticleComments = async () => {
-    //     const comments = await getArticleComments(this.props.article_id);
-    //     this.setState({ comments });
-    // };
+    fetchArticleComments = async () => {
+        const comments = await getArticleComments(this.props.article_id);
+        this.setState({ comments });
+    };
 
     addComment = () => {
         this.setState({ addComment: true });

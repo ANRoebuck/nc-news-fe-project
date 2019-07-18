@@ -5,16 +5,29 @@ import '../css/Error.css';
 class Error extends Component {
 
     render() {
-        const { message } = this.props.location.state;
-        console.log( message ) ;
-        return (
-            <div>
+        if (this.props.location && this.props.location.state) {
+            const { status, message } = this.props.location.state;
+            return (
+                <div>
+                    <h1>Oops!</h1>
+                    <h2>
+                        Error: {status}
+                    </h2>
+                    <h2 className="ErrorMessage">
+                        {message}
+                    </h2>
+                </div>
+            );
+        } else {
+            return (
+                <div>
                 <h1>Oops!</h1>
                 <h2>
-                    {message}
+                    Error: 404
                 </h2>
             </div>
-        );
+            )
+        }
     }
 }
 

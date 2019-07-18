@@ -26,7 +26,7 @@ class App extends Component {
           <Articles path="/topics/:topic" />
           <Articles path="/users/:author/articles" />
           <ArticlePage path="/articles/:article_id" />
-          <Error path="/error" />
+          <Error default path="/error" />
         </Router>
         <footer className="Footer">
           <h3>{`< This is a footer, it goes at the bottom />`}</h3>
