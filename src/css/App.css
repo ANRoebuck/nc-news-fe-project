@@ -1,0 +1,38 @@
+.App {
+    width: 100%;
+    padding: 20px;
+    display: grid;  
+    grid-template-rows: 2fr, 1fr, 8fr, 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "footer";
+}
+
+.Title {
+    grid-area: header;
+    text-align: center;
+    height: 100%;
+    background-color: gainsboro;
+}
+
+.Nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: space-evenly;
+}
+.NavLink {
+    text-transform: capitalize;
+    color: black;
+}
+
+.Router {
+    grid-area: main;
+    justify-content: space-evenly;
+}
+
+.Footer {
+    grid-area: footer;
+    text-align: center;
+}

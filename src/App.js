@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Link } from '@reach/router';
-import './App.css';
+import './css/App.css';
 import Nav from './components/Nav'
 import Articles from './components/Articles'
 import ArticlePage from './components/ArticlePage'

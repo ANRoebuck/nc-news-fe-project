@@ -1,0 +1,29 @@
+
+.NewCommentForm {
+    border: solid 1px black;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 10fr, 1fr;
+    grid-template-rows: 1fr, 1fr, 1fr;
+    grid-template-areas:
+        "input cancel"
+        "input deadspace"
+        "input submit";
+}
+.NewCommentInput {
+    grid-area: input;
+}
+.NewCommentCancelButton {
+    background-color: silver;
+    padding: 8px;
+    grid-area: cancel;
+    width: 100px;
+    height: 50px;
+}
+.NewCommentSubmitButton {
+    background-color: silver;
+    padding: 8px;
+    grid-area: submit;
+    width: 100px;   
+    height: 50px;
+}

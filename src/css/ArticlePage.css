@@ -1,0 +1,21 @@
+.ArticleTitle{
+    text-align: center;
+    text-transform: capitalize;
+}
+.ArticleAuthor {
+
+}
+.ArticleCreated {
+
+}
+.ArticleBody {
+    border: solid 1px black;
+    padding: 20px;
+}
+
+
+.CommentSection {
+}
+.CommentsHeader {
+    text-align: center;
+}

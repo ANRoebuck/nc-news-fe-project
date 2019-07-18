@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getArticles } from './../utils/utils';
 import ArticleCard from './ArticleCard';
-import { async } from 'q';
+import '../css/Articles.css'
 
 class Articles extends Component {
 
@@ -100,8 +100,7 @@ class Articles extends Component {
         else {
             const defaultDescend = ['created_at', 'votes', 'comment_count'];
             const order = (defaultDescend.includes(newSort) ? 'desc' : 'asc')
-            const sort_by = newSort;
-            this.setState({ sort_by, order })
+            this.setState({ sort_by: newSort, order })
         };
     };
 

@@ -1,0 +1,107 @@
+.CommentCard {
+    border: solid 1px black;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 200px 1fr 100px ;
+    grid-template-areas:
+      "info body votes";
+}
+@media only screen and (max-width: 600px) {
+    .CommentCard {
+        grid-template: none;
+        grid-template-rows: 50px, 1fr;
+        grid-template-columns: 1fr, 1fr;
+        grid-template-areas:
+          "info votes"
+          "body body";
+    }
+}
+
+.CommentInfo {
+    grid-area: info;
+}
+.CommentBody {
+    grid-area: body;
+}
+.CommentVotes {
+    grid-area: votes;
+}
+
+
+
+/* votes score with vote buttons */
+.OtherUserVotes {
+    display: grid;
+    grid-template-rows: 1fr, 1fr, 1fr;
+    grid-template-areas:
+        "votesTop"
+        "votesMiddle"
+        "votesBottom";
+}
+.VoteUp {
+    grid-area: votesTop;
+}
+.OtherUserScore {
+    grid-area: votesMiddle;
+    text-align: center;
+    margin: 5px;
+}
+.VoteDown {
+    grid-area: votesBottom;
+}
+.OtherUserVotes > .VoteButton {
+    padding: 8px;
+    background-color: silver;
+}
+@media only screen and (max-width: 600px) {
+    .OtherUserVotes {
+        grid-template: none;
+        grid-template: 1fr, 1fr, 1fr;
+        grid-template-areas:
+            "votesLeft votesMiddle votesRightt";
+    }
+    .OtherUserScore{
+        grid-area: votesLeft;
+    }
+    .VoteUp {
+        grid-area: votesMiddle;
+    }
+    .VoteDown {
+        grid-area: votesRight;
+    }
+}
+
+
+
+/* votes score with delete button */
+.OwnUserVotes {
+    display: grid;
+    grid-template-rows: 1fr, 1fr;
+    grid-template-areas:
+        "votesTop"
+        "votesBottom";
+}
+.OwnUserScore {
+    grid-area: votesTop;
+    text-align: center;
+    margin: 5px;
+}
+.CommentDelete {
+    grid-area: votesBottom;
+    padding: 8px;
+    background-color: silver;
+}
+@media only screen and (max-width: 600px) {
+    .OwnUserVotes {
+        grid-template: none;
+        grid-template-columns: 1fr, 1fr;
+        grid-template-areas:
+            "votesLeft votesRight";
+    }
+    .OwnUserScore {
+        grid-area: votesLeft;
+    }
+    .CommentDelete {
+        grid-area: votesRight;
+    }
+}

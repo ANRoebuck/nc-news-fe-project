@@ -10,6 +10,8 @@ import {
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 import ArticleFooter from './ArticleFooter';
+import '../css/ArticlePage.css'
+import '../css/CommentForm.css'
 
 
 class ArticlePage extends Component {
@@ -46,6 +48,7 @@ class ArticlePage extends Component {
 
                 {this.state.addComment === true &&
                     <CommentForm
+                        className="CommentForm"
                         currentUser={this.state.currentUser}
                         cancelAddComment={this.cancelAddComment}
                         sendComment={this.sendComment}
@@ -54,7 +57,7 @@ class ArticlePage extends Component {
 
                 {comments.length > 0 &&
                     <div className="CommentSection">
-                        <h3 className="CommentsHeader">Here are some comments</h3>
+                        <h3 className="CommentsHeader">Comments</h3>
                         {comments.map(comment => (
                             <CommentCard
                                 key={comment.comment_id}

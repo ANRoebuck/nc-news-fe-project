@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { patchVotes } from './../utils/utils';
 import VoteButton from './VoteButton';
+import '../css/ArticleFooter.css';
 
 class ArticleFooter extends Component {
 
@@ -17,29 +18,36 @@ class ArticleFooter extends Component {
         return (
 
             <div className="ArticleFooter">
+                
+                <div className = "ArticleFooterCommentsInfo">
 
-                <button
-                    type="button"
-                    className="AddCommentButton"
-                    onClick={addComment}
-                >
-                    Add Comment 
-                </button>
+                    <div className="ArticleFooterCommentCount">
+                        Comments: {comment_count}
+                    </div>
 
-                <div className="ArticleFooterInfo"> Comments: {comment_count}</div>
-                <div className="ArticleFooterInfo"> Votes: {votes + voteChange}</div>
+                    <button
+                        className="ArticleFooterCommentAdd"
+                        type="button"
+                        onClick={addComment}
+                    >
+                        Add Comment 
+                    </button>
 
-                <div className="ArticleVoteButtons">
+                </div>
+
+
+                <div className="ArticleFooterVotesInfo">
                     <VoteButton
-                        label="Vote Up"
+                        label="+"
                         inc_votes={1}
                         id={article_id}
                         segment="articles"
                         sendVote={this.sendVote}
                         voted={voteChange === 1}
                     />
+                    <div className="ArticleFooterVoteCount"> Votes: {votes + voteChange}</div>
                     <VoteButton
-                        label="Vote Down"
+                        label="-"
                         id={article_id}
                         segment="articles"
                         inc_votes={-1}

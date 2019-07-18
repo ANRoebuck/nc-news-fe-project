@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../css/CommentForm.css'
 
 class CommentForm extends Component {
 
@@ -12,36 +13,41 @@ class CommentForm extends Component {
         const { cancelAddComment } = this.props;
 
         return (
-            <form
-                className="NewCommentForm"
-                id="NewCommentForm"
-                onSubmit={this.handleSubmit}
-            >
-                <input
-                    className="NewCommentInput"
-                    type="text"
-                    value={this.state.newComment}
-                    id="NewCommentInput"
-                    onChange={this.handleChange}>
-                </input>
-
-                <button
-                    className="NewCommentCancelButton"
-                    type="button"
-                    id="CancelAddComment"
-                    onClick={cancelAddComment}
+            <div>
+                <label for="NewCommentForm">
+                    Write a comment...
+                </label>
+                <form
+                    className="NewCommentForm"
+                    id="NewCommentForm"
+                    onSubmit={this.handleSubmit}
                 >
-                    Cancel
-                </button>
+                    <input
+                        className="NewCommentInput"
+                        type="text"
+                        value={this.state.newComment}
+                        id="NewCommentInput"
+                        onChange={this.handleChange}>
+                    </input>
 
-                <button
-                    className="NewCommentSubmitButton"
-                    type="submit"
-                >
-                    Submit
-                </button>
+                    <button
+                        className="NewCommentCancelButton"
+                        type="button"
+                        id="CancelAddComment"
+                        onClick={cancelAddComment}
+                    >
+                        Cancel
+                    </button>
 
-            </form>
+                    <button
+                        className="NewCommentSubmitButton"
+                        type="submit"
+                    >
+                        Submit
+                    </button>
+
+                </form>
+            </div>
         );
     };
 

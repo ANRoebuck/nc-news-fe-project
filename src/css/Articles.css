@@ -1,0 +1,41 @@
+.ArticlesHeader {
+    text-align: center;
+    text-transform: capitalize;
+    background-color: gainsboro;
+}
+
+
+.ArticlesTable {
+    border: solid 1px black;
+    padding: 10px;
+    width: 100%;    
+}
+.TableHeader {
+    padding: 20px;
+    background-color: gainsboro;
+}
+th {
+    height: 50px;
+}
+.TableHeading {
+    height: 50px;
+}
+.TableTitle {
+    width: 50%;
+}
+.TableAuthor {
+    text-align: center;
+    width: 10%;
+}
+.TableCreatedAt {
+    text-align: center;
+    width: 20%;
+}
+.TableComments {
+    text-align: center;
+    width: 10%;
+}
+.TableVotes {
+    text-align: center;
+    width: 10%;
+}
