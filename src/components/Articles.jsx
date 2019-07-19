@@ -18,11 +18,11 @@ class Articles extends Component {
         const up = '⇈';
         const down = '⇊';
         const headers = [
-            { className: 'TableTitle', id: 'title', heading: 'Title' },
-            { className: 'TableAuthor', id: 'author', heading: 'Author' },
-            { className: 'TableCreatedAt', id: 'created_at', heading: 'Published' },
-            { className: 'TableComments', id: 'comment_count', heading: 'Comments' },
-            { className: 'TableVotes', id: 'votes', heading: 'Votes' }
+            { id: 'title', heading: 'Title' },
+            { id: 'author', heading: 'Author' },
+            { id: 'created_at', heading: 'Published' },
+            { id: 'comment_count', heading: 'Comments' },
+            { id: 'votes', heading: 'Votes' }
         ]
         return (
             <div>
@@ -33,41 +33,36 @@ class Articles extends Component {
                     : `All Articles`}
                 </h2>
 
-                <table className="ArticlesTable">
+                <div className="ArticlesSortButtons">
+                    <div className="ArticleSortButton">
+                        Sort by:
+                    </div>
+                    {headers.map(header => {
+                        const { id, heading } = header;
+                        return (
+                            <div
+                                className="ArticleSortButton"
+                                id={id}
+                                key={`header${id}`}
+                                onClick={this.changeSort}
+                            >
+                            {heading}
+                                {sort_by === id
+                                ? order === 'asc'
+                                    ? ` ${up}`
+                                    : ` ${down}`
+                                : null          }
+                            </div>
+                        );
+                    })}
+                </div>
 
-                    <thead className="TableHeader">
-                        <tr>
-                            {headers.map(header => {
-                                const { className, id, heading } = header;
-                                return (
-                                    <th
-                                        className={className}
-                                        id={id}
-                                        key={`header${id}`}
-                                        onClick={this.changeSort}
-                                    >
-                                    {heading}
-                                     {sort_by === id
-                                        ? order === 'asc'
-                                            ? ` ${up}`
-                                            : ` ${down}`
-                                        : null          }
-                                    </th>
-                                )
-                            })}
-
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {articles.map(article => {
-                            const { article_id } = article;
-                            return (
-                                <ArticleCard key={article_id} article={article}/>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                {articles.map(article => {
+                    const { article_id } = article;
+                    return (
+                        <ArticleCard key={article_id} article={article}/>
+                    );
+                })}
 
             </div>
         );
