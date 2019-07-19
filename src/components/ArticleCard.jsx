@@ -18,7 +18,11 @@ class ArticleCard extends Component {
                     </Link>
                 </h2>
                 <div className="ArticleCardInfoContainer">
-                    <div className="ArticleCardInfo">{author}</div>
+                    <div className="ArticleCardInfo">
+                        <Link to={`/users/${author}/articles`}>
+                            {author}
+                        </Link>
+                    </div>
                     <div className="ArticleCardInfo">{formattedDate}</div>
                     <div className="ArticleCardInfo">Comments: {comment_count}</div>
                     <div className="ArticleCardInfo">Votes: {votes}</div>

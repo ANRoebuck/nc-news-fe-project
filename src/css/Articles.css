@@ -5,7 +5,9 @@
 .ArticlesHeader {
     text-align: center;
     text-transform: capitalize;
-    background-color: gainsboro;
+    background-color: silver;
+    border: solid 1px black;
+    height: 40px;
 }
 
 
@@ -26,8 +28,12 @@
 }
 @media only screen and (max-width: 600px){
     .ArticleSortButton {
+        height: 20px;
         width: 100px;
     }
+}
+#SortBy {
+    background-color: silver;
 }
 
 .ArticleCardsContainer {

@@ -34,7 +34,7 @@ class Articles extends Component {
                 </h2>
 
                 <div className="ArticlesSortButtons">
-                    <div className="ArticleSortButton">
+                    <div className="ArticleSortButton" id="SortBy">
                         Sort by:
                     </div>
                     {headers.map(header => {
