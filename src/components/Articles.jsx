@@ -25,7 +25,7 @@ class Articles extends Component {
             { id: 'votes', heading: 'Votes' }
         ]
         return (
-            <div>
+            <div className="ArticlesContainer">
 
                 <h2 className="ArticlesHeader">
                     {topic ? `Articles on ${topic}`
@@ -56,13 +56,15 @@ class Articles extends Component {
                         );
                     })}
                 </div>
-
-                {articles.map(article => {
-                    const { article_id } = article;
-                    return (
-                        <ArticleCard key={article_id} article={article}/>
-                    );
-                })}
+                
+                <div className="ArticleCardsContainer">
+                    {articles.map(article => {
+                        const { article_id } = article;
+                        return (
+                            <ArticleCard key={article_id} article={article}/>
+                        );
+                    })}
+                </div>
 
             </div>
         );

@@ -1,3 +1,7 @@
+.ArticlesContainer {
+    
+}
+
 .ArticlesHeader {
     text-align: center;
     text-transform: capitalize;
@@ -5,20 +9,6 @@
 }
 
 
-.ArticlesTable {
-    border: solid 1px black;
-    padding: 10px;
-    width: 100%;    
-}
-.TableHeader {
-    padding: 20px;
-    background-color: gainsboro;
-}
-th {
-    /* height: 50px; */
-    width: 15%;
-    border: solid 1px black;
-}
 .ArticlesSortButtons{
     display: flex;
     flex-wrap: wrap;
@@ -39,21 +29,9 @@ th {
         width: 100px;
     }
 }
-.TableHeading {
-    height: 50px;
-}
-.TableTitle {
-    text-align: center;
-}
-.TableAuthor {
-    text-align: center;
-}
-.TableCreatedAt {
-    text-align: center;
-}
-.TableComments {
-    text-align: center;
-}
-.TableVotes {
-    text-align: center;
+
+.ArticleCardsContainer {
+    border: solid 1px black;
+    padding: 10px;
+    background-color: gainsboro;
 }
