@@ -17,11 +17,11 @@ class ArticleCard extends Component {
                         {title}
                     </Link>
                 </h2>
-                <div className="ArticleCardInfo">
-                    <div>{author}</div>
-                    <div>{formattedDate}</div>
-                    <div>Comments: {comment_count}</div>
-                    <div>Votes: {votes}</div>
+                <div className="ArticleCardInfoContainer">
+                    <div className="ArticleCardInfo">{author}</div>
+                    <div className="ArticleCardInfo">{formattedDate}</div>
+                    <div className="ArticleCardInfo">Comments: {comment_count}</div>
+                    <div className="ArticleCardInfo">Votes: {votes}</div>
                 </div>
             </div>
         )
