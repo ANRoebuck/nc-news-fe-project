@@ -3,7 +3,6 @@ import { getArticles } from './../utils/utils';
 import ArticleCard from './ArticleCard';
 import ArticleSortButton from './ArticleSortButton';
 import '../css/Articles.css'
-import PropTypes from 'prop-types';
 
 class Articles extends Component {
 
@@ -23,7 +22,9 @@ class Articles extends Component {
             { id: 'comment_count', category: 'Comments' },
             { id: 'votes', category: 'Votes' }
         ]
+
         return (
+
             <div className="ArticlesContainer">
 
                 <h2 className="ArticlesHeader">
@@ -41,7 +42,8 @@ class Articles extends Component {
                             sortCategory={sortCategory}
                             changeSort={this.changeSort}
                             sort_by={sort_by}
-                            order={order}/>
+                            order={order}
+                        />
                     )}
                 </div>
                 
@@ -49,7 +51,8 @@ class Articles extends Component {
                     {articles.map(article =>
                         <ArticleCard
                             key={article.article_id}
-                            article={article}/>
+                            article={article}
+                        />
                     )}
                 </div>
 
@@ -98,8 +101,5 @@ class Articles extends Component {
     };
 };
 
-Articles.propTypes = {
-
-};
 
 export default Articles;

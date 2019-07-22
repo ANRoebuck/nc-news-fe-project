@@ -91,7 +91,15 @@ class CommentCard extends Component {
 };
 
 CommentCard.propTypes = {
-
+    comment: PropTypes.shape({
+        body: PropTypes.string,
+        author: PropTypes.string,
+        votes: PropTypes.number,
+        created_at: PropTypes.string,
+        comment_id: PropTypes.number
+    }).isRequired,
+    currentUser: PropTypes.string.isRequired,
+    removeComment: PropTypes.func.isRequired
 };
 
 export default CommentCard;

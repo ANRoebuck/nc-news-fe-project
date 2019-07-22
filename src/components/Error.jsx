@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import '../css/Error.css';
 
 class Error extends Component {
@@ -26,13 +25,9 @@ class Error extends Component {
                     Error: 404
                 </h2>
             </div>
-            )
-        }
-    }
-}
-
-Error.propTypes = {
-
+            );
+        };
+    };
 };
 
 export default Error;

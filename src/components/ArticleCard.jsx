@@ -12,6 +12,7 @@ class ArticleCard extends Component {
 
         return (
             <div className="ArticleCard">
+
                 <h2 className="ArticleCardTitle">
                     <Link to={`/articles/${article_id}`}>
                         {title}
@@ -27,9 +28,9 @@ class ArticleCard extends Component {
                     <div className="ArticleCardInfo">Comments: {comment_count}</div>
                     <div className="ArticleCardInfo">Votes: {votes}</div>
                 </div>
-            </div>
-        )
 
+            </div>
+        );
     };
 };
 

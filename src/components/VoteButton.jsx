@@ -25,7 +25,12 @@ class VoteButton extends Component {
 };
 
 VoteButton.propTypes = {
-
+    label : PropTypes.string.isRequired,
+    voted: PropTypes.bool.isRequired,
+    segment: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    inc_votes: PropTypes.number.isRequired,
+    sendVote: PropTypes.func.isRequired
 };
 
 export default VoteButton;

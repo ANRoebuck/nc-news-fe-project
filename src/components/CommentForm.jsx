@@ -69,7 +69,9 @@ class CommentForm extends Component {
 };
 
 CommentForm.propTypes = {
-
+    cancelAddComment: PropTypes.func.isRequired,
+    sendComment: PropTypes.func.isRequired,
+    currentUser: PropTypes.string.isRequired
 };
 
 export default CommentForm;

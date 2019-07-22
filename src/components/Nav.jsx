@@ -28,7 +28,12 @@ class Nav extends Component {
 };
 
 Nav.propTypes = {
-
+    topics: PropTypes.arrayOf(
+        PropTypes.shape({
+            description: PropTypes.string,
+            slug: PropTypes.string
+        })
+    ).isRequired
 };
 
 export default Nav;

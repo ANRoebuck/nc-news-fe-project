@@ -27,7 +27,13 @@ const ArticleSortButton = props => {
 };
 
 ArticleSortButton.propTypes = {
-    
+    sortCategory: PropTypes.shape({
+        category: PropTypes.string,
+        id: PropTypes.string
+    }).isRequired,
+    sort_by: PropTypes.string.isRequired,
+    order: PropTypes.string.isRequired,
+    changeSort: PropTypes.func.isRequired
 };
 
 export default ArticleSortButton;

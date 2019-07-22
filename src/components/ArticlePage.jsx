@@ -30,13 +30,15 @@ class ArticlePage extends Component {
         const { article, comments } = this.state;
         const { title, body, comment_count, votes, created_at, author, article_id } = article;
         const formattedDate = created_at ? formatDate(created_at) : null;
+        
         return (
-
             <div>
+
                 <h2 className="ArticleTitle">{title}</h2>
                 <h3 className="ArticleAuthor">{author}</h3>
                 <h3 className="ArticleCreated">{formattedDate}</h3>
                 <p className="ArticleBody">{body}</p>
+                
                 <ArticleFooter
                     className="ArticleFooter"
                     article_id={article_id}
@@ -69,7 +71,6 @@ class ArticlePage extends Component {
                 }
 
             </div>
-
         );
     };
 
@@ -81,7 +82,6 @@ class ArticlePage extends Component {
     fetchArticle = async () => {
         try {
             const article = await getArticleById(this.props.article_id);
-            // const comments = await getArticleComments(this.props.article_id);
             this.setState({ article });
         }
         catch (err) {
@@ -143,7 +143,7 @@ class ArticlePage extends Component {
 };
 
 ArticlePage.propTypes = {
-
+    article_id: PropTypes.number.isRequired
 };
 
 export default ArticlePage;

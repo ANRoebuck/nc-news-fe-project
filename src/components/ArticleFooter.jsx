@@ -11,20 +11,16 @@ class ArticleFooter extends Component {
     };
 
     render() {
-
         const { article_id, addComment, comment_count, votes } = this.props;
         const { voteChange } = this.state;
 
         return (
-
             <div className="ArticleFooter">
                 
                 <div className = "ArticleFooterCommentsInfo">
-
                     <div className="ArticleFooterCommentCount">
                         Comments: {comment_count}
                     </div>
-
                     <button
                         className="ArticleFooterCommentAdd"
                         type="button"
@@ -32,9 +28,7 @@ class ArticleFooter extends Component {
                     >
                         Add Comment 
                     </button>
-
                 </div>
-
 
                 <div className="ArticleFooterVotesInfo">
                     <VoteButton
