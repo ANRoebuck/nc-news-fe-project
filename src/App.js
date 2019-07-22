@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <h1 className="Title">{`< NC-News />`}</h1>
         <Nav className="Nav" topics={topics}></Nav>
-        <Router className="Router">
+        <Router className="Router" primary={false}>
           <Articles path="/" />
           <Articles path="/topics/:topic" />
           <Articles path="/users/:author/articles" />
