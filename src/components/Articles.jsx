@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getArticles } from './../utils/utils';
 import ArticleCard from './ArticleCard';
+import ArticleSortButton from './ArticleSortButton';
 import '../css/Articles.css'
+import PropTypes from 'prop-types';
 
 class Articles extends Component {
 
@@ -15,55 +16,41 @@ class Articles extends Component {
     render() {
         const { topic, author } = this.props;
         const { articles, sort_by, order } = this.state;
-        const up = '⇈';
-        const down = '⇊';
-        const headers = [
-            { id: 'title', heading: 'Title' },
-            { id: 'author', heading: 'Author' },
-            { id: 'created_at', heading: 'Published' },
-            { id: 'comment_count', heading: 'Comments' },
-            { id: 'votes', heading: 'Votes' }
+        const sortCategories = [
+            { id: 'title', category: 'Title' },
+            { id: 'author', category: 'Author' },
+            { id: 'created_at', category: 'Published' },
+            { id: 'comment_count', category: 'Comments' },
+            { id: 'votes', category: 'Votes' }
         ]
         return (
             <div className="ArticlesContainer">
 
                 <h2 className="ArticlesHeader">
                     {topic ? `Articles on ${topic}`
-                    : author ? `Articles by ${author}`
-                    : `All Articles`}
+                    : author ? `Articles by ${author}` : `All Articles`}
                 </h2>
 
                 <div className="ArticlesSortButtons">
                     <div className="ArticleSortButton" id="SortBy">
                         Sort by:
                     </div>
-                    {headers.map(header => {
-                        const { id, heading } = header;
-                        return (
-                            <div
-                                className="ArticleSortButton"
-                                id={id}
-                                key={`header${id}`}
-                                onClick={this.changeSort}
-                            >
-                            {heading}
-                                {sort_by === id
-                                ? order === 'asc'
-                                    ? ` ${up}`
-                                    : ` ${down}`
-                                : null          }
-                            </div>
-                        );
-                    })}
+                    {sortCategories.map(sortCategory => 
+                        <ArticleSortButton
+                            className="ArticleSortButton"
+                            sortCategory={sortCategory}
+                            changeSort={this.changeSort}
+                            sort_by={sort_by}
+                            order={order}/>
+                    )}
                 </div>
                 
                 <div className="ArticleCardsContainer">
-                    {articles.map(article => {
-                        const { article_id } = article;
-                        return (
-                            <ArticleCard key={article_id} article={article}/>
-                        );
-                    })}
+                    {articles.map(article =>
+                        <ArticleCard
+                            key={article.article_id}
+                            article={article}/>
+                    )}
                 </div>
 
             </div>

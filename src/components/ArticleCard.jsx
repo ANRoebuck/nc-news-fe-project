@@ -34,7 +34,14 @@ class ArticleCard extends Component {
 };
 
 ArticleCard.propTypes = {
-
+    article: PropTypes.shape({
+        article_id: PropTypes.number,
+        title: PropTypes.string,
+        author: PropTypes.string,
+        created_at: PropTypes.string,
+        comment_count: PropTypes.number,
+        votes: PropTypes.number
+    }).isRequired
 };
 
 export default ArticleCard;

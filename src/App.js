@@ -29,7 +29,7 @@ class App extends Component {
           <Error default path="/error" />
         </Router>
         <footer className="Footer">
-          <h3>{`< This is a footer, it goes at the bottom />`}</h3>
+          <h3>{`< A Roebuck - 2019 />`}</h3>
         </footer>
       </div>
     );
