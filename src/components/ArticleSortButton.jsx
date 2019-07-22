@@ -11,7 +11,7 @@ const ArticleSortButton = props => {
 
     return (
         <div
-            className="ArticleSortButton"
+            className="ArticleSort SortButton"
             id={id}
             key={`category${id}`}
             onClick={changeSort}

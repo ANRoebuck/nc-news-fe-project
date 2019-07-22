@@ -21,25 +21,34 @@
     padding-bottom: 0;
     background-color: gainsboro;
 }
-.ArticleSortButton {
+.ArticleSort {
     width: 15%;
     height: 30px;
     text-align: center;
     border: solid 1px black;
-    background-color: cornflowerblue;
     color: white;
     margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+    transition: 100ms;
+}
+.SortHeader {
+    background-color: slateblue;
+}
+.SortButton {
+    background-color: cornflowerblue;
+}
+.SortButton:hover {
+    transform: scale(1.1);
+    transition: 100ms;
+    background-color: deepskyblue;
+    box-shadow: 3px 3px 3px aqua;
 }
 @media only screen and (max-width: 600px){
-    .ArticleSortButton {
+    .ArticleSort {
         height: 20px;
         width: 100px;
     }
-}
-#SortBy {
-    background-color: slateblue;
 }
 
 .ArticleCardsContainer {

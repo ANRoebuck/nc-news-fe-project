@@ -33,12 +33,11 @@ class Articles extends Component {
                 </h2>
 
                 <div className="ArticlesSortButtons">
-                    <div className="ArticleSortButton" id="SortBy">
+                    <div className="ArticleSort SortHeader">
                         Sort by:
                     </div>
                     {sortCategories.map(sortCategory => 
                         <ArticleSortButton
-                            className="ArticleSortButton"
                             sortCategory={sortCategory}
                             changeSort={this.changeSort}
                             sort_by={sort_by}
