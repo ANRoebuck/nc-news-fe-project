@@ -139,7 +139,6 @@ class ArticlePage extends Component {
                console.log(err);
            });
     };
-
 };
 
 ArticlePage.propTypes = {

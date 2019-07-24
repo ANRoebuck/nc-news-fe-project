@@ -3,10 +3,12 @@ import { getArticles } from './../utils/utils';
 import ArticleCard from './ArticleCard';
 import ArticleSortButton from './ArticleSortButton';
 import '../css/Articles.css'
+import '../css/Loading.css'
 
 class Articles extends Component {
 
     state = {
+        loaded: false,
         articles: [],
         sort_by: 'created_at',
         order: 'desc'
@@ -14,7 +16,7 @@ class Articles extends Component {
 
     render() {
         const { topic, author } = this.props;
-        const { articles, sort_by, order } = this.state;
+        const { articles, sort_by, order, loaded } = this.state;
         const sortCategories = [
             { id: 'title', category: 'Title' },
             { id: 'author', category: 'Author' },
@@ -25,37 +27,48 @@ class Articles extends Component {
 
         return (
 
-            <div className="ArticlesContainer">
+            loaded === true
+            ? 
+                <div className="ArticlesContainer">
 
-                <h2 className="ArticlesHeader">
-                    {topic ? `Articles on ${topic}`
-                    : author ? `Articles by ${author}` : `All Articles`}
-                </h2>
+                    <h2 className="ArticlesHeader">
+                        {topic ? `Articles on ${topic}`
+                        : author ? `Articles by ${author}` : `All Articles`}
+                    </h2>
 
-                <div className="ArticlesSortButtons">
-                    <div className="ArticleSort SortHeader">
-                        Sort by:
+                    <div className="ArticlesSortButtons">
+                        <div className="ArticleSort SortHeader">
+                            Sort by:
+                        </div>
+                        {sortCategories.map(sortCategory => 
+                            <ArticleSortButton
+                                sortCategory={sortCategory}
+                                changeSort={this.changeSort}
+                                sort_by={sort_by}
+                                order={order}
+                            />
+                        )}
                     </div>
-                    {sortCategories.map(sortCategory => 
-                        <ArticleSortButton
-                            sortCategory={sortCategory}
-                            changeSort={this.changeSort}
-                            sort_by={sort_by}
-                            order={order}
-                        />
-                    )}
-                </div>
-                
-                <div className="ArticleCardsContainer">
-                    {articles.map(article =>
-                        <ArticleCard
-                            key={article.article_id}
-                            article={article}
-                        />
-                    )}
-                </div>
+                    
+                    <div className="ArticleCardsContainer">
+                        {articles.map(article =>
+                            <ArticleCard
+                                key={article.article_id}
+                                article={article}
+                            />
+                        )}
+                    </div>
 
-            </div>
+                </div>
+            :
+                <div className="LoadingContainer">
+                    <div className="LoadingMessage">
+                        Loading ...
+                    </div>
+                    <div id="loader-wrapper">
+                        <div id="loader"></div>
+                    </div>
+                </div>
         );
     };
 
@@ -77,7 +90,7 @@ class Articles extends Component {
         const { sort_by, order } = this.state;
         const args = { topic, author, sort_by, order };
         const articles = await getArticles(args);
-        this.setState({ articles });
+        this.setState({ articles, loaded: true });
     };
 
     changeSort = (event) => {

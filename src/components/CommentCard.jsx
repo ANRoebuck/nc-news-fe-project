@@ -54,9 +54,9 @@ class CommentCard extends Component {
                         </div>
                     :
                         <div className="OwnUserVotes">
-                        <div className="OwnUserScore">
-                            Votes: {votes + voteChange}
-                        </div>
+                            <div className="OwnUserScore">
+                                Votes: {votes + voteChange}
+                            </div>
                             <button
                                 className="CommentDelete"
                                 id="CommentDelete"

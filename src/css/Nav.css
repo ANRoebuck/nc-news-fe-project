@@ -1,0 +1,19 @@
+.Nav {
+    grid-area: nav;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    color: white;
+    background-color: cornflowerblue;
+}
+.NavLink {
+    text-align: center;
+    text-transform: capitalize;
+    color: white;
+    padding: 5px;
+    width: 150px;
+}
+.NavLink:hover {
+    transform: scale(1.2);
+    background-color: slateblue;
+}

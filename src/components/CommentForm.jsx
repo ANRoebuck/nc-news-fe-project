@@ -22,13 +22,12 @@ class CommentForm extends Component {
                     id="NewCommentForm"
                     onSubmit={this.handleSubmit}
                 >
-                    <input
+                    <textarea
                         className="NewCommentInput"
-                        type="text"
                         value={this.state.newComment}
                         id="NewCommentInput"
                         onChange={this.handleChange}>
-                    </input>
+                    </textarea>
 
                     <button
                         className="NewCommentCancelButton"
