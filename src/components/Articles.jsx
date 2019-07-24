@@ -28,7 +28,7 @@ class Articles extends Component {
         return (
 
             loaded === true
-            ? 
+            ?
                 <div className="ArticlesContainer">
 
                     <h2 className="ArticlesHeader">
@@ -61,9 +61,10 @@ class Articles extends Component {
 
                 </div>
             :
+            //loading articles
                 <div className="LoadingContainer">
                     <div className="LoadingMessage">
-                        Loading ...
+                        Loading articles ...
                     </div>
                     <div id="loader-wrapper">
                         <div id="loader"></div>

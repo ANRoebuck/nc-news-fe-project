@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { navigate } from '@reach/router'
 import PropTypes from 'prop-types';
 import {
     getArticleById,
@@ -11,11 +12,13 @@ import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 import ArticleFooter from './ArticleFooter';
 import '../css/ArticlePage.css'
-import { navigate } from '@reach/router'
+import '../css/Loading.css'
 
 class ArticlePage extends Component {
 
     state = {
+        loadedArticle: false,
+        loadedComments: false,
         article: {
             article_id: 0,
             votes: 0,
@@ -27,46 +30,69 @@ class ArticlePage extends Component {
     };
     
     render() {
-        const { article, comments } = this.state;
+        const { article, comments, loadedArticle, loadedComments } = this.state;
         const { title, body, comment_count, votes, created_at, author, article_id } = article;
         const formattedDate = created_at ? formatDate(created_at) : null;
         
         return (
             <div>
 
-                <h2 className="ArticleTitle">{title}</h2>
-                <h3 className="ArticleAuthor">{author}</h3>
-                <h3 className="ArticleCreated">{formattedDate}</h3>
-                <p className="ArticleBody">{body}</p>
-                
-                <ArticleFooter
-                    className="ArticleFooter"
-                    article_id={article_id}
-                    comment_count={comment_count}
-                    votes={votes}
-                    addComment={this.addComment}
-                />
+                {loadedArticle === true
+                ?
+                    <div>
+                        <h2 className="ArticleTitle">{title}</h2>
+                        <h3 className="ArticleAuthor">{author}</h3>
+                        <h3 className="ArticleCreated">{formattedDate}</h3>
+                        <p className="ArticleBody">{body}</p>
+                        
+                        <ArticleFooter
+                            className="ArticleFooter"
+                            article_id={article_id}
+                            comment_count={comment_count}
+                            votes={votes}
+                            addComment={this.addComment}
+                        />
 
-                {this.state.addComment === true &&
-                    <CommentForm
-                        className="CommentForm"
-                        currentUser={this.state.currentUser}
-                        cancelAddComment={this.cancelAddComment}
-                        sendComment={this.sendComment}
-                    />
-                }
-
-                {comments.length > 0 &&
-                    <div className="CommentSection">
-                        <h3 className="CommentsHeader">Comments</h3>
-                        {comments.map(comment => (
-                            <CommentCard
-                                key={comment.comment_id}
-                                comment={comment}
+                        {this.state.addComment === true &&
+                            <CommentForm
+                                className="CommentForm"
                                 currentUser={this.state.currentUser}
-                                removeComment={this.removeComment}
+                                cancelAddComment={this.cancelAddComment}
+                                sendComment={this.sendComment}
                             />
-                        ))}
+                        }
+
+                        {loadedComments === true
+                        ?
+                            <div className="CommentSection">
+                                <h3 className="CommentsHeader">
+                                    {comments.length > 0
+                                        ? `Comments` 
+                                        : `Be the first to comment...`}
+                                </h3>
+                                {comments.map(comment => (
+                                    <CommentCard
+                                        key={comment.comment_id}
+                                        comment={comment}
+                                        currentUser={this.state.currentUser}
+                                        removeComment={this.removeComment}
+                                    />
+                                ))}
+                            </div>
+                        :
+                            null  //loading comments
+                        }
+
+                    </div>
+                :
+                //loading article
+                    <div className="LoadingContainer">
+                        <div className="LoadingMessage">
+                            Loading article...
+                        </div>
+                        <div id="loader-wrapper">
+                            <div id="loader"></div>
+                        </div>
                     </div>
                 }
 
@@ -82,7 +108,7 @@ class ArticlePage extends Component {
     fetchArticle = async () => {
         try {
             const article = await getArticleById(this.props.article_id);
-            this.setState({ article });
+            this.setState({ article, loadedArticle: true });
         }
         catch (err) {
             console.log(err.response);
@@ -98,7 +124,7 @@ class ArticlePage extends Component {
 
     fetchArticleComments = async () => {
         const comments = await getArticleComments(this.props.article_id);
-        this.setState({ comments });
+        this.setState({ comments, loadedComments: true });
     };
 
     addComment = () => {
