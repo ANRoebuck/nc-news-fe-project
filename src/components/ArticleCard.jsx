@@ -14,13 +14,19 @@ class ArticleCard extends Component {
             <div className="ArticleCard">
 
                 <h2 className="ArticleCardTitle">
-                    <Link to={`/articles/${article_id}`}>
+                    <Link
+                        to={`/articles/${article_id}`}
+                        className="ArticleLink"
+                    >
                         {title}
                     </Link>
                 </h2>
                 <div className="ArticleCardInfoContainer">
-                    <div className="ArticleCardInfo">
-                        <Link to={`/users/${author}/articles`}>
+                    <div className="ArticleCardInfo ArticleCardAuthor">
+                        <Link
+                            to={`/users/${author}/articles`}
+                            className="AuthorLink"
+                        >
                             {author}
                         </Link>
                     </div>
